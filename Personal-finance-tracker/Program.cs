@@ -5,6 +5,7 @@ namespace PersonalFinanceTracker
     {
         public static void Main()
         {
+            List<string[]> AllExpenses = new List<string[]>();
             try
             {
                 Console.WriteLine("===== Personal Finance Tracker =====\n" +
@@ -18,6 +19,15 @@ namespace PersonalFinanceTracker
                 "====================================\n" +
                 "Please choose an option (1-7):");
                 byte MenuOption = Convert.ToByte(Console.ReadLine());
+                switch (MenuOption)
+                {
+                    case 1:
+                      Console.WriteLine("do something");
+                      break;
+                    case 2:
+                      Console.WriteLine("do something");
+                      break;
+                }
             }
             catch
             {
