@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 namespace PersonalFinanceTracker
 {
@@ -33,32 +34,37 @@ namespace PersonalFinanceTracker
         }
         public static void AddExpense()
         {
-            List<Expense> Expenses = new List<Expense>();
+            List<Transaction> transactions = new List<Transaction>();
 
             Console.WriteLine("Enter amount");
-            float expenseAmount = float.Parse(Console.ReadLine());
-            Console.WriteLine("Enter type of expense");
-            string? expenseType = Console.ReadLine();
-            Console.WriteLine("Enter category");
-            string? expenseCategory = Console.ReadLine();
-            if (expenseType == null || expenseCategory == null)
+            float trasactionAmount = float.Parse(Console.ReadLine());
+            Console.WriteLine("Enter type of transaction");
+            string? transactionType = Console.ReadLine();
+            Console.WriteLine("Enter category of transaction");
+            string? transactionCategory = Console.ReadLine();
+            if (transactionType == null || transactionCategory  == null)
             {
                 Console.WriteLine("error");
                 return;
             }
-            Expense expenseobject = new Expense(expenseAmount, expenseType, expenseCategory);
-            Expenses.Add(expenseobject);
-            string json = JsonSerializer.Serialize(Expenses, new JsonSerializerOptions {WriteIndented = true});
+            if(transactionType != "Expense" && transactionType != "Income")
+            {
+                Console.WriteLine("Enter valid transaction type");
+                return;
+            }
+            Transaction transactioneObject = new Transaction(trasactionAmount, transactionType, transactionCategory);
+            transactions.Add(transactioneObject);
+            string json = JsonSerializer.Serialize(transactions, new JsonSerializerOptions {WriteIndented = true});
             File.WriteAllText("expenses.json",json);
         }
     }
-    class Expense
+    class Transaction
     {
 
         public float Amount {get;set;}
         public string Type {get;set;}
         public string Category {get;set;}
-        public Expense(float amount, string type, string category)
+        public Transaction(float amount, string type, string category)
         {
             Amount = amount;
             Type = type;
