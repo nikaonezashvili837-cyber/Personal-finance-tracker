@@ -33,6 +33,8 @@ namespace PersonalFinanceTracker
         }
         public static void AddExpense()
         {
+            List<Expense> Expenses = new List<Expense>();
+
             Console.WriteLine("Enter amount");
             float expenseAmount = float.Parse(Console.ReadLine());
             Console.WriteLine("Enter type of expense");
@@ -44,20 +46,23 @@ namespace PersonalFinanceTracker
                 Console.WriteLine("error");
                 return;
             }
-            Expense expenseobject = new Expense(expenseAmount,expenseType,expenseCategory);
+            Expense expenseobject = new Expense(expenseAmount, expenseType, expenseCategory);
+            Expenses.Add(expenseobject);
+            string json = JsonSerializer.Serialize(Expenses, new JsonSerializerOptions {WriteIndented = true});
+            File.WriteAllText("expenses.json",json);
         }
     }
     class Expense
     {
-        
-        private float amount;
-        private string type = "";
-        private string category = "";
-        public Expense(float amount,string type , string category)
+
+        public float Amount {get;set;}
+        public string Type {get;set;}
+        public string Category {get;set;}
+        public Expense(float amount, string type, string category)
         {
-            this.amount = amount;
-            this.type = type;
-            this.category = category;
+            Amount = amount;
+            Type = type;
+            Category = category;
         }
     }
 }
