@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 namespace PersonalFinanceTracker
 {
     class Program
@@ -18,6 +19,12 @@ namespace PersonalFinanceTracker
                 "====================================\n" +
                 "Please choose an option (1-7):");
                 byte MenuOption = Convert.ToByte(Console.ReadLine());
+                switch (MenuOption)
+                {
+                    case 1:
+                        AddExpense();
+                        break;
+                }
             }
             catch
             {
@@ -37,17 +44,20 @@ namespace PersonalFinanceTracker
                 Console.WriteLine("error");
                 return;
             }
-            Expense expenseobject = new Expense();
-            expenseobject.amount = expenseAmount;
-            expenseobject.type = expenseType;
-            expenseobject.category = expenseCategory;
-            Console.WriteLine(expenseobject.amount);
+            Expense expenseobject = new Expense(expenseAmount,expenseType,expenseCategory);
         }
     }
     class Expense
     {
-        public float amount;
-        public string type = "";
-        public string category = "";
+        
+        private float amount;
+        private string type = "";
+        private string category = "";
+        public Expense(float amount,string type , string category)
+        {
+            this.amount = amount;
+            this.type = type;
+            this.category = category;
+        }
     }
 }
