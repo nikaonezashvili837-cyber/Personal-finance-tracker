@@ -34,36 +34,46 @@ namespace PersonalFinanceTracker
         }
         public static void AddExpense()
         {
+            string jsonFile = File.ReadAllText("expenses.json");
             List<Transaction> transactions = new List<Transaction>();
-
             Console.WriteLine("Enter amount");
             float trasactionAmount = float.Parse(Console.ReadLine());
             Console.WriteLine("Enter type of transaction");
             string? transactionType = Console.ReadLine();
             Console.WriteLine("Enter category of transaction");
             string? transactionCategory = Console.ReadLine();
-            if (transactionType == null || transactionCategory  == null)
+            if (transactionType == null || transactionCategory == null)
             {
                 Console.WriteLine("error");
                 return;
             }
-            if(transactionType != "Expense" && transactionType != "Income")
+            if (transactionType != "Expense" && transactionType != "Income")
             {
                 Console.WriteLine("Enter valid transaction type");
                 return;
             }
             Transaction transactioneObject = new Transaction(trasactionAmount, transactionType, transactionCategory);
-            transactions.Add(transactioneObject);
-            string json = JsonSerializer.Serialize(transactions, new JsonSerializerOptions {WriteIndented = true});
-            File.WriteAllText("expenses.json",json);
+            string json;
+            if (jsonFile == "")
+            {
+                transactions.Add(transactioneObject);
+                json = JsonSerializer.Serialize(transactions, new JsonSerializerOptions { WriteIndented = true });
+            }
+            else
+            {
+                List<Transaction>? transactionsData = JsonSerializer.Deserialize<List<Transaction>>(jsonFile);
+                transactionsData.Add(transactioneObject);
+                json = JsonSerializer.Serialize(transactionsData, new JsonSerializerOptions { WriteIndented = true });
+            }
+            File.WriteAllText("expenses.json", json);
         }
     }
     class Transaction
     {
 
-        public float Amount {get;set;}
-        public string Type {get;set;}
-        public string Category {get;set;}
+        public float Amount { get; set; }
+        public string Type { get; set; }
+        public string Category { get; set; }
         public Transaction(float amount, string type, string category)
         {
             Amount = amount;
