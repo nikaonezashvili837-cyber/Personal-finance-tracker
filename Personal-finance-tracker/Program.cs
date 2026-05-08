@@ -9,7 +9,10 @@ namespace PersonalFinanceTracker
         {
             try
             {
-                Console.WriteLine("===== Personal Finance Tracker =====\n" +
+                bool mainLoop = true;
+                while (mainLoop)
+                {
+                    Console.WriteLine("===== Personal Finance Tracker =====\n" +
                 "1. Add Transaction\n" +
                 "2. View All Transactions\n" +
                 "3. View Summary\n" +
@@ -19,12 +22,17 @@ namespace PersonalFinanceTracker
                 "7. Exit\n" +
                 "====================================\n" +
                 "Please choose an option (1-7):");
-                byte MenuOption = Convert.ToByte(Console.ReadLine());
-                switch (MenuOption)
-                {
-                    case 1:
-                        AddExpense();
-                        break;
+                    byte MenuOption = Convert.ToByte(Console.ReadLine());
+                    switch (MenuOption)
+                    {
+                        case 1:
+                            AddExpense();
+                            break;
+                        case 7:
+                            mainLoop = false;
+                            break;
+                    }
+                    MenuOption = 8;
                 }
             }
             catch
@@ -66,6 +74,7 @@ namespace PersonalFinanceTracker
                 json = JsonSerializer.Serialize(transactionsData, new JsonSerializerOptions { WriteIndented = true });
             }
             File.WriteAllText("expenses.json", json);
+            return;
         }
     }
     class Transaction
