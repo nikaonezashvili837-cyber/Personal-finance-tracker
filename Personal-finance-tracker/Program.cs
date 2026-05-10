@@ -28,6 +28,9 @@ namespace PersonalFinanceTracker
                         case 1:
                             AddExpense();
                             break;
+                        case 2:
+                           ViewTransactions();
+                           break;
                         case 7:
                             mainLoop = false;
                             break;
@@ -75,6 +78,11 @@ namespace PersonalFinanceTracker
             }
             File.WriteAllText("expenses.json", json);
             return;
+        }
+        public static void ViewTransactions()
+        {
+            string jsonContent = File.ReadAllText("expenses.json");
+            Console.WriteLine(jsonContent);
         }
     }
     class Transaction
