@@ -5,7 +5,7 @@ namespace PersonalFinanceTracker
     {
         public static void ShowSummary()
         {
-            string jsonContent = File.ReadAllText("expenses.json");
+            string jsonContent = File.ReadAllText("transactions.json");
             List<Transaction>? totalTransactions = JsonSerializer.Deserialize<List<Transaction>>(jsonContent);
             float totalIncome = 0;
             float totalExpense = 0;

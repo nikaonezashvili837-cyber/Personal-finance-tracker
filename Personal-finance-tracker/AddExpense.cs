@@ -5,7 +5,7 @@ namespace PersonalFinanceTracker
     {
         public static void AddExpense()
         {
-            string jsonFile = File.ReadAllText("expenses.json");
+            string jsonFile = File.ReadAllText("transactions.json");
             List<Transaction> transactions = new List<Transaction>();
             Console.WriteLine("Enter amount");
             float trasactionAmount = float.Parse(Console.ReadLine());
@@ -36,7 +36,7 @@ namespace PersonalFinanceTracker
                 transactionsData.Add(transactioneObject);
                 json = JsonSerializer.Serialize(transactionsData, new JsonSerializerOptions { WriteIndented = true });
             }
-            File.WriteAllText("expenses.json", json);
+            File.WriteAllText("transactions.json", json);
             return;
         }
     }
