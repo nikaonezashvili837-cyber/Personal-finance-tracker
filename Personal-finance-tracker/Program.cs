@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Transactions;
 namespace PersonalFinanceTracker
 {
     partial class Program
@@ -29,8 +31,11 @@ namespace PersonalFinanceTracker
                             AddExpense();
                             break;
                         case 2:
-                           ViewTransactions();
-                           break;
+                            ViewTransactions();
+                            break;
+                        case 3:
+                            ShowSummary();
+                            break;
                         case 7:
                             mainLoop = false;
                             break;
@@ -46,12 +51,46 @@ namespace PersonalFinanceTracker
         public static void ViewTransactions()
         {
             string jsonContent = File.ReadAllText("expenses.json");
-            if(jsonContent == "")
+            if (jsonContent == "")
             {
                 Console.WriteLine("No transactions present");
                 return;
             }
             Console.WriteLine(jsonContent);
+        }
+        public static void ShowSummary()
+        {
+            string jsonContent = File.ReadAllText("expenses.json");
+            List<Transaction>? totalTransactions = JsonSerializer.Deserialize<List<Transaction>>(jsonContent);
+            float totalIncome = 0;
+            float totalExpense = 0;
+            foreach (var element in totalTransactions)
+            {
+                if(element.Type == "Income")
+                {
+                    totalIncome+=element.Amount;
+                }
+                else
+                {
+                    totalExpense+=element.Amount;
+                }
+            }
+            Summary summary = new Summary(totalIncome, totalExpense);
+            Console.WriteLine($"Income: {summary.Income}");
+            Console.WriteLine($"Expenses: {summary.Expenses}");
+            Console.WriteLine($"Balance: {summary.Balance}");
+        }
+        class Summary
+        {
+            public float Income { get; set; }
+            public float Expenses { get; set; }
+            public float Balance {get;set;}
+            public Summary(float income, float expense)
+            {
+                this.Income = income;
+                this.Expenses = expense;
+                this.Balance = this.Income - this.Expenses;
+            }
         }
     }
 }
