@@ -22,7 +22,7 @@ namespace PersonalFinanceTracker
                 }
             }
             string filteredJson = JsonSerializer.Serialize(filteredTransactions, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("FilteredTransactions.json", filteredJson);
+            Console.WriteLine(filteredJson);
         }
     }
 }
