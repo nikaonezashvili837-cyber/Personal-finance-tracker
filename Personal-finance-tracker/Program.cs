@@ -18,7 +18,7 @@ namespace PersonalFinanceTracker
                 "1. Add Transaction\n" +
                 "2. View All Transactions\n" +
                 "3. View Summary\n" +
-                "4. Filter Transactions\n" +
+                "4. Filter Transactions By Category\n" +
                 "5. Save Data\n" +
                 "6. Load Data\n" +
                 "7. Exit\n" +
@@ -36,6 +36,11 @@ namespace PersonalFinanceTracker
                         case 3:
                             ShowSummary();
                             break;
+                        case 4:
+                           Console.WriteLine("Enter filtering criteria:");
+                           string? filteringCriteria = Console.ReadLine();
+                           FilterTransactions(filteringCriteria);
+                           break;
                         case 7:
                             mainLoop = false;
                             break;
