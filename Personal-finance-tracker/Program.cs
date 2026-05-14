@@ -51,15 +51,5 @@ namespace PersonalFinanceTracker
                 Console.WriteLine("Error");
             }
         }
-        public static void ViewTransactions()
-        {
-            string jsonContent = File.ReadAllText("expenses.json");
-            if (jsonContent == "")
-            {
-                Console.WriteLine("No transactions present");
-                return;
-            }
-            Console.WriteLine(jsonContent);
-        }
     }
 }
