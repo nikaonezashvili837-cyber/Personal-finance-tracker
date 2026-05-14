@@ -19,11 +19,9 @@ namespace PersonalFinanceTracker
                 "2. View All Transactions\n" +
                 "3. View Summary\n" +
                 "4. Filter Transactions By Category\n" +
-                "5. Save Data\n" +
-                "6. Load Data\n" +
-                "7. Exit\n" +
+                "5. Exit\n" +
                 "====================================\n" +
-                "Please choose an option (1-7):");
+                "Please choose an option (1-5):");
                     byte MenuOption = Convert.ToByte(Console.ReadLine());
                     switch (MenuOption)
                     {
@@ -41,7 +39,7 @@ namespace PersonalFinanceTracker
                            string? filteringCriteria = Console.ReadLine();
                            FilterTransactions(filteringCriteria);
                            break;
-                        case 7:
+                        case 5:
                             mainLoop = false;
                             break;
                     }
