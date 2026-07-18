@@ -4,7 +4,7 @@ A simple console-based application for managing personal finances. It allows use
  
 ## Features
  
-1. **Add Transaction** — Record a new income or expense entry, including details such as amount, category, and date.
+1. **Add Transaction** — Record a new income or expense entry, including details such as amount, category, and date saving transaction to JSON file.
 2. **View All Transactions** — Display a complete list of all recorded transactions in chronological order.
 3. **View Summary** — Get an overview of total income, total expenses, and net balance.
 4. **Filter Transactions By Category** — Narrow down the transaction list to a specific category (e.g., Food, Rent, Utilities) for focused review.
@@ -27,9 +27,3 @@ This project is designed to help users track their day-to-day income and expense
  
 - **Language:** C#
 - **Interface:** Console application
-## Possible Future Enhancements
- 
-- Persist transactions to a file or database (e.g., JSON or SQLite)
-- Add support for editing and deleting transactions
-- Generate monthly or yearly financial reports
-- Add data visualization (charts/graphs) for spending trends
